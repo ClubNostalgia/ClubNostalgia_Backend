@@ -1,15 +1,14 @@
 package com.ClubNostalgia.backend.mapper;
 
-    import com.ClubNostalgia.backend.dto.request.UserRequest;
-    import com.ClubNostalgia.backend.dto.response.UserResponse;
-    import com.ClubNostalgia.backend.entity.User;
-    import org.mapstruct.Mapper;
-    import org.mapstruct.Mapping;
-    import org.mapstruct.factory.Mappers;
-
+import com.ClubNostalgia.backend.dto.request.UserRequest;
+import com.ClubNostalgia.backend.dto.response.UserResponse;
+import com.ClubNostalgia.backend.entity.User;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper{
+public interface UserMapper {
 
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 

@@ -7,8 +7,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.ClubNostalgia.backend.security.filter.JWTAuthentication;
 import com.ClubNostalgia.backend.security.filter.JWTAuthorization;
@@ -19,11 +17,6 @@ import com.ClubNostalgia.backend.security.filter.JWTAuthorization;
 public class SpringConfig {
 
     private final CustomAuthenticationManager customAuthenticationManager;
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -37,7 +30,7 @@ public class SpringConfig {
         .authorizeHttpRequests(request -> request
             .requestMatchers("/h2/**").permitAll()
             .requestMatchers(HttpMethod.POST, "/api/v1/users/register").permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/v1/users").hasAnyRole("USER", "ADMIN")
+            .requestMatchers(HttpMethod.GET, "/api/v1/users").hasAnyRole( "ADMIN")
             .anyRequest().authenticated()
         )
         .addFilter(jwtAuthentication)
