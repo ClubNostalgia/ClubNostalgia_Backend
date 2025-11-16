@@ -29,8 +29,9 @@ public class SpringConfig {
         .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
         .authorizeHttpRequests(request -> request
             .requestMatchers("/h2/**").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/v1/users/register").permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/v1/users").hasAnyRole( "ADMIN")
+            .requestMatchers("/").permitAll() 
+            .requestMatchers(HttpMethod.POST, "/api/users").permitAll()  
+            .requestMatchers(HttpMethod.GET, "/api/users").hasAnyRole("ADMIN")  
             .anyRequest().authenticated()
         )
         .addFilter(jwtAuthentication)

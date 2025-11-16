@@ -21,28 +21,27 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
 public class JWTAuthorization extends OncePerRequestFilter {
     @Override
-    protected void doFilterInternal(@NonNull HttpServletRequest request, 
-                                   @NonNull HttpServletResponse response, 
-                                   @NonNull FilterChain filterChain)
+    protected void doFilterInternal(@NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain)
             throws ServletException, IOException {
-        
+
         String header = request.getHeader("Authorization");
 
         if (header == null || !header.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
-            return; 
+            return;
         }
 
         String token = header.replace("Bearer ", "");
-        
+
         DecodedJWT decodedJWT;
         try {
             decodedJWT = JWT.require(Algorithm.HMAC512("383jdshjd8ADADF$$fsdfs4d.r4fse4frfr"))
-                .build()
-                .verify(token);
+                    .build()
+                    .verify(token);
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("Token JWT inválido o expirado");
@@ -52,10 +51,10 @@ public class JWTAuthorization extends OncePerRequestFilter {
 
         String username = decodedJWT.getSubject();
         List<String> roles = decodedJWT.getClaim("roles").asList(String.class);
-        
+
         List<GrantedAuthority> authorities = roles.stream()
-            .map(role -> new SimpleGrantedAuthority("ROLE_" + role)) 
-            .collect(Collectors.toList());
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                .collect(Collectors.toList());
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
