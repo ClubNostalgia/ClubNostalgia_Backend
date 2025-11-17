@@ -9,7 +9,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-Builder
+@Builder
 public class ProjectResponse {
     private UUID id;
     private String title;
@@ -17,5 +17,4 @@ public class ProjectResponse {
     private String synopsis;
     private String information;
     private String author;
-    
 }
