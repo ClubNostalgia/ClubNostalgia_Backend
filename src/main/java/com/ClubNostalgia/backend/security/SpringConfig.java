@@ -52,6 +52,7 @@ public class SpringConfig {
             .requestMatchers("/h2/**").permitAll()
             .requestMatchers("/").permitAll() 
             .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+            .requestMatchers("/api/projects/**").permitAll()  
             .requestMatchers(HttpMethod.GET, "/api/users").hasAnyRole("ADMIN")
             .anyRequest().authenticated()
         )
