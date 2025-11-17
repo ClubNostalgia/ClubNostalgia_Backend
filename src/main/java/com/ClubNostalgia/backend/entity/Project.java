@@ -1,41 +1,49 @@
 package com.ClubNostalgia.backend.entity;
 
-import java.util.UUID;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "proyectos")
+import java.util.UUID;
+
 @Data
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "projects")
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false, length = 100)
+    @NotBlank(message = "El título no puede estar vacío")
+    @Column(nullable = false, unique = true)
     private String title;
 
-    @Column(nullable = false, length = 255)
+    @Column(columnDefinition = "TEXT")
     private String video;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private VideoType videoType;
+
+    @Column(columnDefinition = "TEXT")
     private String synopsis;
 
-        @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String information;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String author;
 
+    public enum VideoType {
+        YOUTUBE,
+        VIMEO,
+        FILE
+    }
 }
