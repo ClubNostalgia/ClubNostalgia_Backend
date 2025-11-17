@@ -33,16 +33,16 @@ public class JWTAuthentication extends UsernamePasswordAuthenticationFilter {
     }
 
 
-@Override
-public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException{
-    try {
-        User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
-Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
-        return customAuthenticationManager.authenticate(authentication);
-    } catch (Exception e) {
-        throw new RuntimeException();
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException{
+        try {
+            User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
+            return customAuthenticationManager.authenticate(authentication);
+        } catch (IOException e) {
+            throw new RuntimeException("Error al leer credenciales: " + e.getMessage(), e);
+        }
     }
-}
 
     @Override
     public void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException{
@@ -51,18 +51,17 @@ Authentication authentication = new UsernamePasswordAuthenticationToken(user.get
         response.getWriter().flush();
     }
 
-@Override
-public void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult){
-    List<String> roles = authResult.getAuthorities().stream()
-        .map(grantedAuthority -> grantedAuthority.getAuthority().replace("ROLE_", ""))
-        .collect(Collectors.toList());
-    
-    String token = JWT.create()
-        .withSubject(authResult.getName())
-        .withClaim("roles", roles)
-        .withExpiresAt(new Date(System.currentTimeMillis() + (5 * 60000)))
-        .sign(Algorithm.HMAC512("383jdshjd8ADADF$$fsdfs4d.r4fse4frfr"));
-    response.addHeader("Authorization", "Bearer " + token);
+    @Override
+    public void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult){
+        List<String> roles = authResult.getAuthorities().stream()
+            .map(grantedAuthority -> grantedAuthority.getAuthority().replace("ROLE_", ""))
+            .collect(Collectors.toList());
+        
+        String token = JWT.create()
+            .withSubject(authResult.getName())
+            .withClaim("roles", roles)
+            .withExpiresAt(new Date(System.currentTimeMillis() + (5 * 60000)))
+            .sign(Algorithm.HMAC512("383jdshjd8ADADF$$fsdfs4d.r4fse4frfr"));
+        response.addHeader("Authorization", "Bearer " + token);
+    }
 }
-}
-
