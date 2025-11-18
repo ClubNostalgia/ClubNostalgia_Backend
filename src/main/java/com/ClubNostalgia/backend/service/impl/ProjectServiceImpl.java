@@ -1,9 +1,11 @@
 package com.ClubNostalgia.backend.service.impl;
 
 import com.ClubNostalgia.backend.repository.ProjectRepository;
+import com.ClubNostalgia.backend.repository.CategoryRepository;
 import com.ClubNostalgia.backend.service.interfaces.ProjectService;
 import com.ClubNostalgia.backend.mapper.ProjectMapper;
 import com.ClubNostalgia.backend.entity.Project;
+import com.ClubNostalgia.backend.entity.Category;
 import com.ClubNostalgia.backend.dto.request.ProjectRequest;
 import com.ClubNostalgia.backend.dto.response.ProjectResponse;
 import com.ClubNostalgia.backend.exception.ResourceNotFoundException;
@@ -13,18 +15,20 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
-    private final ProjectMapper projectMapper = Mappers.getMapper(ProjectMapper.class);
+    private final CategoryRepository categoryRepository;
+private final ProjectMapper projectMapper;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
-    }
+public ProjectServiceImpl(ProjectRepository projectRepository, CategoryRepository categoryRepository, ProjectMapper projectMapper) {
+    this.projectRepository = projectRepository;
+    this.categoryRepository = categoryRepository;
+    this.projectMapper = projectMapper;
+}
 
     @Override
     public ProjectResponse createProject(ProjectRequest projectRequest) {
@@ -36,6 +40,13 @@ public class ProjectServiceImpl implements ProjectService {
         }
         
         Project project = projectMapper.projectRequestToProject(projectRequest);
+        
+        if (projectRequest.getCategoryId() != null) {
+            Category category = categoryRepository.findById(projectRequest.getCategoryId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Categoría", "ID", projectRequest.getCategoryId()));
+            project.setCategory(category);
+        }
+        
         Project savedProject = projectRepository.save(project);
         return projectMapper.projectToProjectResponse(savedProject); 
     }
@@ -71,9 +82,17 @@ public class ProjectServiceImpl implements ProjectService {
 
         project.setTitle(projectRequest.getTitle());
         project.setVideo(projectRequest.getVideo());
+        project.setVideoType(projectRequest.getVideoType());
         project.setSynopsis(projectRequest.getSynopsis());
         project.setInformation(projectRequest.getInformation());
         project.setAuthor(projectRequest.getAuthor());
+
+        // NUEVO: Actualizar categoría si viene en el request
+        if (projectRequest.getCategoryId() != null) {
+            Category category = categoryRepository.findById(projectRequest.getCategoryId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Categoría", "ID", projectRequest.getCategoryId()));
+            project.setCategory(category);
+        }
 
         Project updatedProject = projectRepository.save(project);
         return projectMapper.projectToProjectResponse(updatedProject);

@@ -13,8 +13,11 @@ public interface ProjectMapper {
     
     ProjectMapper INSTANCE = Mappers.getMapper(ProjectMapper.class);
     
+    @Mapping(source = "category.id", target = "categoryId")
+    @Mapping(source = "category.name", target = "categoryName")
     ProjectResponse projectToProjectResponse(Project project);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "category", ignore = true)
     Project projectRequestToProject(ProjectRequest projectRequest);
 }

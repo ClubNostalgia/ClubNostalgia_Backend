@@ -1,12 +1,12 @@
 package com.ClubNostalgia.backend.dto.response;
 
+import com.ClubNostalgia.backend.entity.Project.VideoType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.UUID;
 
-import com.ClubNostalgia.backend.entity.Project.VideoType;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -20,4 +20,6 @@ public class ProjectResponse {
     private String synopsis;
     private String information;
     private String author;
+    private UUID categoryId;
+    private String categoryName;
 }

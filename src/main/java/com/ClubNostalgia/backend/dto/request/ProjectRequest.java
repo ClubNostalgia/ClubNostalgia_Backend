@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,4 +36,6 @@ public class ProjectRequest {
     @NotBlank(message = "El autor no puede estar vacío")
     @Size(max = 50, message = "El autor no puede tener más de 50 caracteres")
     private String author;
+
+    private UUID categoryId;
 }
