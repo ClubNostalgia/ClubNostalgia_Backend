@@ -2,13 +2,16 @@ package com.ClubNostalgia.backend.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 import com.ClubNostalgia.backend.dto.request.ProjectRequest;
 import com.ClubNostalgia.backend.dto.response.ProjectResponse;
 import com.ClubNostalgia.backend.entity.Project;
 
 @Mapper(componentModel = "spring")
-public interface ProjectMapper{
+public interface ProjectMapper {
+    
+    ProjectMapper INSTANCE = Mappers.getMapper(ProjectMapper.class);
     
     ProjectResponse projectToProjectResponse(Project project);
 
