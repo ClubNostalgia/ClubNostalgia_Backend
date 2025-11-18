@@ -45,13 +45,13 @@ public class SpringConfig {
             jwtAuthentication.setFilterProcessesUrl("/login");
 
             http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))  
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
     .authorizeHttpRequests(request -> request
         .requestMatchers("/h2/**").permitAll()
         .requestMatchers("/").permitAll()
-        .requestMatchers("/api/projects/**").permitAll()           /
+        .requestMatchers("/api/projects/**").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/users").permitAll() 
         .requestMatchers(HttpMethod.GET, "/api/users/**").permitAll() 
         .anyRequest().authenticated()

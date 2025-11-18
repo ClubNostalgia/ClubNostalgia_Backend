@@ -2,19 +2,19 @@ package com.ClubNostalgia.backend.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "projects")
+@Table(name = "projectos")
 public class Project {
 
     @Id
@@ -41,9 +41,14 @@ public class Project {
     @Column(nullable = false)
     private String author;
 
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "category_id")
+        private Category category;
+
     public enum VideoType {
         YOUTUBE,
         VIMEO,
         FILE
     }
+
 }
