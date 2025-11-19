@@ -52,6 +52,7 @@ public class SpringConfig {
         .authorizeHttpRequests(request -> request
             .requestMatchers("/h2-console/**").permitAll()
             .requestMatchers("/api/auth/login").permitAll()
+            .requestMatchers("/api/contact").permitAll()
             .requestMatchers("/").permitAll()
             .requestMatchers("/api/categories/**").permitAll()
             .requestMatchers("/api/projects/**").permitAll()
