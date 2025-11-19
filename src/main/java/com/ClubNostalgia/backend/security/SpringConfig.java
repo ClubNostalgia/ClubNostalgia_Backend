@@ -42,14 +42,16 @@ public class SpringConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         JWTAuthentication jwtAuthentication = new JWTAuthentication(customAuthenticationManager);
-        jwtAuthentication.setFilterProcessesUrl("/login");
+        jwtAuthentication.setFilterProcessesUrl("/api/auth/login");
+
 
         http
         .cors(cors -> cors.configurationSource(corsConfigurationSource()))
         .csrf(csrf -> csrf.disable())
         .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
         .authorizeHttpRequests(request -> request
-            .requestMatchers("/h2/**").permitAll()
+            .requestMatchers("/h2-console/**").permitAll()
+            .requestMatchers("/api/auth/login").permitAll()
             .requestMatchers("/").permitAll()
             .requestMatchers("/api/categories/**").permitAll()
             .requestMatchers("/api/projects/**").permitAll()
