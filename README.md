@@ -2,23 +2,21 @@
 
 API REST del sistema Club Nostalgia, una plataforma para gestionar proyectos audiovisuales nostálgicos.
 
-## 📋 Tabla de Contenidos
+## Tabla de Contenidos
 
 - [Tecnologías](#tecnologías)
 - [Requisitos Previos](#requisitos-previos)
 - [Instalación](#instalación)
 - [Configuración](#️configuración)
 - [Ejecutar la Aplicación](#ejecutar-la-aplicación)
-- [Estructura del Proyecto](#estructura-del-proyecto)
 - [API Endpoints](#api-endpoints)
 - [Base de Datos](#️base-de-datos)
 - [Seguridad](#seguridad)
 - [Testing](#testing)
 - [Scripts Maven](#scripts-maven)
-- [Troubleshooting](#roubleshooting)
 - [Notas Importantes](#notas-importantes)
 
-##  Tecnologías
+## Tecnologías
 
 Este proyecto está construido con las siguientes tecnologías:
 
@@ -76,53 +74,6 @@ mvn spring-boot:run
 
 La aplicación estará disponible en: `http://localhost:8080`
 
-```
-
-
-##  Estructura del Proyecto
-```
-ClubNostalgia_Backend/
-├── src/
-│   ├── main/
-│   │   ├── java/com/ClubNostalgia/backend/
-│   │   │   ├── config/              # Configuraciones (CORS, Security, etc.)
-│   │   │   ├── controller/          # Controladores REST
-│   │   │   │   ├── CategoryController.java
-│   │   │   │   ├── ProjectController.java
-│   │   │   │   └── UserController.java
-│   │   │   ├── dto/                 # Data Transfer Objects
-│   │   │   │   ├── request/        # DTOs de entrada
-│   │   │   │   └── response/       # DTOs de salida
-│   │   │   ├── entity/              # Entidades JPA
-│   │   │   │   ├── Category.java
-│   │   │   │   ├── Project.java
-│   │   │   │   └── User.java
-│   │   │   ├── exception/           # Excepciones personalizadas
-│   │   │   ├── mapper/              # MapStruct mappers
-│   │   │   ├── repository/          # Repositorios JPA
-│   │   │   ├── security/            # Configuración de seguridad
-│   │   │   │   ├── filter/         # Filtros de seguridad
-│   │   │   │   └── UserDetail.java
-│   │   │   ├── service/             # Lógica de negocio
-│   │   │   │   ├── impl/           # Implementaciones
-│   │   │   │   └── interfaces/     # Interfaces
-│   │   │   └── ClubNostalgiaApplication.java
-│   │   └── resources/
-│   │       ├── application.properties
-│   │       └── static/
-│   └── test/
-│       └── java/com/ClubNostalgia/backend/
-│           ├── controller/          # Tests unitarios de controllers
-│           ├── service/             # Tests unitarios de services
-│           │   └── impl/
-│           └── integration/         # Tests de integración
-│               └── repository/
-├── data/                            # Base de datos H2 (archivo)
-├── target/                          # Archivos compilados
-├── .env                            # Variables de entorno (NO commitear)
-├── .env.example                    # Ejemplo de variables
-├── pom.xml                         # Configuración Maven
-└── README.md
 ```
 
 ##  API Endpoints
