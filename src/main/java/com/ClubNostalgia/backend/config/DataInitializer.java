@@ -19,7 +19,6 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // Crear categorías
         if (categoryRepository.count() == 0) {
             categoryRepository.save(Category.builder()
                     .name("Audiovisual")
