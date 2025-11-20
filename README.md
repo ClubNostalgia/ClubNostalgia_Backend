@@ -10,7 +10,6 @@ API REST del sistema Club Nostalgia, una plataforma para gestionar proyectos aud
 - [Configuración](#️configuración)
 - [Ejecutar la Aplicación](#ejecutar-la-aplicación)
 - [API Endpoints](#api-endpoints)
-- [Base de Datos](#️base-de-datos)
 - [Seguridad](#seguridad)
 - [Testing](#testing)
 - [Scripts Maven](#scripts-maven)
@@ -180,8 +179,6 @@ mvn test -X
 
 ### Cobertura de Código
 
-
-
 ##  Scripts Maven
 ```bash
 # Compilar
@@ -221,3 +218,8 @@ mvn spring-boot:run
 
 ```
 
+```
+##  Autora
+Ana Aguilera Morales  [https://www.linkedin.com/in/ana-aguilera-morales/]
+
+```
