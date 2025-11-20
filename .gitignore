@@ -10,3 +10,5 @@ target/
 *.swo
 
 .DS_Store
+
+data/clubnostalgia.mv.db
