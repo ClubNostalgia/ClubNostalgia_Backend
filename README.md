@@ -160,9 +160,9 @@ src/test/java/
     └── repository/
         └── UserRepositoryIntegrationTest.java
 ```
-
+```
 ### Ejecutar Tests
-```bash
+bash
 # Todos los tests
 mvn test
 
@@ -174,11 +174,11 @@ mvn test -Dtest=UserRepositoryIntegrationTest
 # Con más detalle
 mvn test -X
 ```
-
+```
 ### Cobertura de Código
 
 ##  Scripts Maven
-```bash
+bash
 # Compilar
 mvn compile
 
@@ -197,11 +197,11 @@ mvn clean install
 # Ejecutar aplicación
 mvn spring-boot:run
 
-```
+
 ##  Notas Importantes
 
 ###  Persistencia de Datos
-
+```
 - H2 en modo archivo **persiste los datos** entre reinicios
 - Los datos se guardan en `./data/clubnostalgia.mv.db`
 - **Hacer backups regulares** de la carpeta `data/`
@@ -215,8 +215,9 @@ mvn spring-boot:run
 
 ```
 
-```
+
 ##  Autora
+```
 Ana Aguilera Morales  [https://www.linkedin.com/in/ana-aguilera-morales/]
 
 ```
