@@ -1,6 +1,6 @@
 # 🎬 Club Nostalgia - Backend
 
-API REST del sistema Club Nostalgia, una plataforma para gestionar proyectos audiovisuales nostálgicos.
+API REST del sistema Club Nostalgia, una plataforma para gestionar proyectos audiovisuales.
 
 ## Tabla de Contenidos
 
@@ -144,8 +144,6 @@ curl -X POST http://localhost:8080/api/projects \
 
 Accede a la consola de H2 en: `http://localhost:8080/h2-console`
 
-
-
 ##  Testing
 
 ### Estructura de Tests
@@ -200,7 +198,6 @@ mvn clean install
 mvn spring-boot:run
 
 ```
-
 ##  Notas Importantes
 
 ###  Persistencia de Datos
